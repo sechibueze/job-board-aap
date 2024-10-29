@@ -1,22 +1,33 @@
 const JobCard = ({ job }) => {
   const {
     id,
-    company,
-    imageURL,
-    type,
+    company_name: compnay,
+    company_logo: imageURL,
+    job_type: type,
     description,
-    location,
-    jobTitle,
-    payRange,
-    postedDate,
+    candidate_required_location: location,
+    title: jobTitle,
+    salary: payRange,
+    publication_date: postedDate,
+    url: applyLink,
   } = job;
   return (
     <div className='job-card'>
-      <img width={'100%'} height={200} src={imageURL} alt={jobTitle} />
+      <img
+        style={{ maxWidth: '300px' }}
+        height={200}
+        src={imageURL}
+        alt={jobTitle}
+      />
       {jobTitle && <h3>{jobTitle}</h3>}
-      {description && <p>{description}</p>}
+      {description && (
+        <div
+          className='description'
+          dangerouslySetInnerHTML={{ __html: description }}
+        ></div>
+      )}
 
-      <a href={`/details/${id}`}>See details</a>
+      <a href={applyLink}>Apply Now</a>
     </div>
   );
 };

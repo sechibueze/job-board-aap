@@ -1,4 +1,5 @@
-import { createContext } from 'react';
+import axios from 'axios';
+import { createContext, useEffect, useState } from 'react';
 
 export const AppContext = createContext();
 
@@ -54,8 +55,21 @@ const jobs = [
   },
 ];
 const AppContextProvider = ({ children }) => {
+  const [jobList, setJobList] = useState([]);
+
+  useEffect(() => {
+    // API: https://github.com/remotive-com/remote-jobs-api?tab=readme-ov-file
+    const URL = ` https://remotive.com/api/remote-jobs?limit=10`;
+    async function fetchJobs() {
+      const response = await axios.get(URL);
+
+      setJobList(response.data.jobs);
+    }
+    fetchJobs();
+  }, []);
+
   const contextValues = {
-    jobs: jobs,
+    jobs: jobList,
   };
   return (
     <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>
