@@ -3,9 +3,9 @@ import Navbar from '../components/Navbar';
 
 const Home = () => {
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <Navbar />
-      <section>
+      <section style={{ width: '100%' }}>
         <h2>Top Jobs</h2>
         <JobList />
       </section>
